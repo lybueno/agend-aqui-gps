@@ -1,18 +1,9 @@
 package br.edu.ifsp.scl.gps.agendAqui.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -34,6 +25,9 @@ public class User implements Serializable {
 				joinColumns = @JoinColumn(name = "user_id"),
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+
+	@OneToMany
+	private final List<Schedule> schedules = new ArrayList<>();
 	
 	public User() {
 	}
@@ -93,6 +87,14 @@ public class User implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
+
+	public void addSchedule(Schedule schedule){
+		schedules.add(schedule);
 	}
 
 	@Override
