@@ -1,7 +1,9 @@
 package br.edu.ifsp.scl.gps.agendAqui.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
@@ -27,6 +29,8 @@ public class UserDTO implements Serializable {
 	private String telefone;
 
 	Set<RoleDTO> roles = new HashSet<>();
+
+	List<ScheduleDTO> schedules = new ArrayList<>();
 	
 	public UserDTO() {}
 
@@ -45,6 +49,7 @@ public class UserDTO implements Serializable {
 		cpf = entity.getCpf();
 		telefone = entity.getTelefone();
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+		entity.getSchedules().forEach(schedule -> this.schedules.add(new ScheduleDTO(schedule)));
 	}
 
 	public Long getId() {
@@ -90,5 +95,8 @@ public class UserDTO implements Serializable {
 	public Set<RoleDTO> getRoles() {
 		return roles;
 	}
-	
+
+	public List<ScheduleDTO> getSchedules() {
+		return schedules;
+	}
 }
