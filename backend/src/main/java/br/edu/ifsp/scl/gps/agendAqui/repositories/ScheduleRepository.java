@@ -7,13 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    Schedule findByProvider(User provider);
+    List<Schedule> findByProvider(User provider);
 
-    Schedule findByClient(User client);
+    List<Schedule> findByClient(User client);
 
-    Schedule findByDate(LocalDate date);
+    Optional<Schedule> findByDate(LocalDate date);
 }
