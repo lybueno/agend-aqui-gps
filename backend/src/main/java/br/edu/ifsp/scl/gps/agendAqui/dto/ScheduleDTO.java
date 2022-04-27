@@ -16,25 +16,25 @@ public class ScheduleDTO implements Serializable {
     @NotBlank(message = "Campo obrigatório")
     private LocalDate date;
 
-    private User idUserProvider;
+    private User provider;
 
-    private User idUserClient;
+    private User client;
 
     public ScheduleDTO() {
     }
 
-    public ScheduleDTO(Long id, LocalDate date, User idUserProvider, User idUserClient) {
+    public ScheduleDTO(Long id, LocalDate date, User provider, User client) {
         this.id = id;
         this.date = date;
-        this.idUserProvider = idUserProvider;
-        this.idUserClient = idUserClient;
+        this.provider = provider;
+        this.client = client;
     }
 
     public ScheduleDTO(Schedule schedule) {
         id = schedule.getId();
         date = schedule.getDate();
-        idUserProvider = schedule.getIdUserProvider();
-        idUserClient = schedule.getIdUserClient();
+        provider = schedule.getProvider();
+        client = schedule.getClient();
     }
 
     public Long getId() {
@@ -53,19 +53,19 @@ public class ScheduleDTO implements Serializable {
         this.date = date;
     }
 
-    public User getIdUserProvider() {
-        return idUserProvider;
+    public User getProvider() {
+        return provider;
     }
 
-    public void setIdUserProvider(User idUserProvider) {
-        this.idUserProvider = idUserProvider;
+    public void setProvider(User provider) {
+        this.provider = provider;
     }
 
-    public User getIdUserClient() {
-        return idUserClient;
+    public User getClient() {
+        return client;
     }
 
-    public void setIdUserClient(User idUserClient) {
-        this.idUserClient = idUserClient;
+    public void setClient(User client) {
+        this.client = client;
     }
 }

@@ -15,11 +15,13 @@ public class Schedule {
 
     private LocalDate date;
 
-    @OneToOne
-    private User idUserProvider;
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    private User provider;
 
-    @OneToOne
-    private User idUserClient;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private User client;
 
 
     public Long getId() {
@@ -38,19 +40,19 @@ public class Schedule {
         this.date = date;
     }
 
-    public User getIdUserProvider() {
-        return idUserProvider;
+    public User getProvider() {
+        return provider;
     }
 
-    public void setIdUserProvider(User idUserProvider) {
-        this.idUserProvider = idUserProvider;
+    public void setIdUserProvider(User provider) {
+        this.provider = provider;
     }
 
-    public User getIdUserClient() {
-        return idUserClient;
+    public User getClient() {
+        return client;
     }
 
-    public void setIdUserClient(User idUserClient) {
-        this.idUserClient = idUserClient;
+    public void setIdUserClient(User client) {
+        this.client = client;
     }
 }

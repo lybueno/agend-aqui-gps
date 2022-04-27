@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    Schedule findByUserProvider(Long idUserProvider);
+    Schedule findByProvider(User provider);
 
-    Schedule findByUserClient(Long idUserClient);
+    Schedule findByClient(User client);
 
     Schedule findByDate(LocalDate date);
 }
