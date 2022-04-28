@@ -6,3 +6,5 @@ INSERT INTO tb_role (authority) VALUES ('ROLE_CUSTOMER');
 
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+
+INSERT INTO tb_schedule(id, date, provider_id, client_id) VALUES(1, TIMESTAMP WITH TIME ZONE '2022-05-14T10:00:00Z', 1, 2);

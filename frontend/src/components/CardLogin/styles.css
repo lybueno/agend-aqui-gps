@@ -25,7 +25,6 @@
   .login-link-register {
     font-weight: bold;
     font-size: 1em;
-    text-align: center;
     letter-spacing: -0.015em;
     text-decoration-line: underline;
     color: #407bff;
@@ -33,21 +32,34 @@
   }
   
   .login-submit {
+    margin-top: 30px;
     margin-bottom: 10px;
-    margin-left: 5%;
+    margin-left: 30px;
   }
   
   .not-registered {
     font-weight: bold;
     font-size: 1em;
-    text-align: center;
+    margin-left: 50%;
     letter-spacing: -0.015em;
     color: #9e9e9e;
   }
   
   .signup-container {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+  }
+
+  .home-card {
+    height: 50%;
+  }
+
+  .home-containt-container {
+    padding: 3px 0px 20px 0px;
+  }
+
+  .home-image-container {
+    padding: 30px 0px 0px 0px;
   }
   
   @media (min-width: 576px) {
@@ -57,25 +69,25 @@
 
     .login-submit .btn-container {
         margin-bottom: 10px;
-        margin-left: 22%;
+        margin-left: 30%;
     }
   }
 
   @media (min-width: 768px) {
 
     .login-card {
-      padding: 40px;
+      padding: 30px;
     }
 
     .login-submit .btn-container {
-        margin-left: 25%;
+        margin-left: 30%;
     }
 
   }
 
   @media (min-width: 1200px){
     .login-submit .btn-container {
-        margin-left: 28%;
+        margin-left: 30%;
     }
   }
   

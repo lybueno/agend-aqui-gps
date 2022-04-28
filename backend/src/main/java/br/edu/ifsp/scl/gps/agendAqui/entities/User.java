@@ -10,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_user")
 public class User implements UserDetails, Serializable {
@@ -31,8 +33,10 @@ public class User implements UserDetails, Serializable {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	@OneToMany(mappedBy = "provider")
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "provider")
 	private List<Schedule> schedules = new ArrayList<>();
+	
 	
 	public User() {
 	}

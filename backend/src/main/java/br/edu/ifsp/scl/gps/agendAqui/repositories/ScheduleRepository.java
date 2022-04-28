@@ -3,6 +3,8 @@ package br.edu.ifsp.scl.gps.agendAqui.repositories;
 
 import br.edu.ifsp.scl.gps.agendAqui.entities.Schedule;
 import br.edu.ifsp.scl.gps.agendAqui.entities.User;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

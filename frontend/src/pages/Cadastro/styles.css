@@ -1,0 +1,62 @@
+.login-card {
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  .login-card h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: -0.015em;
+    color: #093492;
+    text-transform: uppercase;
+    margin-top: 70px;
+    margin-bottom: 50px;
+  }
+
+  .mb-4, .mb-2 {
+    border: solid 2px #b21b1b;
+    border-radius: 6px;
+  }
+  
+  .login-submit {
+    margin-bottom: 10px;
+    margin-left: 40%;
+    border: none;
+  }
+
+  .btn {
+    color: #fff;
+    font-weight: bold;
+    background-color: #093492;
+  }
+  
+  @media (min-width: 576px) {
+    .login-card {
+      padding: 50px;
+    }
+
+    .login-submit .btn-container {
+        margin-bottom: 10px;
+        margin-left: 22%;
+    }
+  }
+
+  @media (min-width: 768px) {
+
+    .login-card {
+      padding: 40px;
+    }
+
+    .login-submit .btn-container {
+        margin-left: 25%;
+    }
+
+  }
+
+  @media (min-width: 1200px){
+    .login-submit .btn-container {
+        margin-left: 28%;
+    }
+  }
+  

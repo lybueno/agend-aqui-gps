@@ -3,6 +3,7 @@ package br.edu.ifsp.scl.gps.agendAqui.resources;
 import br.edu.ifsp.scl.gps.agendAqui.dto.*;
 import br.edu.ifsp.scl.gps.agendAqui.services.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,13 +38,14 @@ public class ScheduleResource {
         return ResponseEntity.ok().body(listDto);
     }
 
-    @GetMapping("/{date}")
-    public ResponseEntity<ScheduleDTO> findByDate(@PathVariable LocalDate localDate){
-        ScheduleDTO dto = service.findByDate(localDate);
+    @RequestMapping(value="/date/{localDate}", method=RequestMethod.GET)
+    public ResponseEntity<ScheduleDTO> findByDate(@PathVariable String localDate){
+    	LocalDate date = LocalDate.parse(localDate);
+        ScheduleDTO dto = service.findByDate(date);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<ScheduleDTO> insert(@Valid @RequestBody ScheduleInsertDTO dto){
         ScheduleDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
