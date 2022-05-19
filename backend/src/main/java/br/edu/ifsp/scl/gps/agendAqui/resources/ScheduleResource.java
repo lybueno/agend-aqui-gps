@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,14 +34,14 @@ public class ScheduleResource {
     }
 
     @GetMapping("/client/{id}")
-    public ResponseEntity<List<ScheduleDTO>> findByClientId(@PathVariable Long id){
+    public ResponseEntity<List<ScheduleDTO>> findByClientId(@PathVariable("id") Long id){
         List<ScheduleDTO> listDto  = service.findByClientId(id);
         return ResponseEntity.ok().body(listDto);
     }
 
-    @RequestMapping(value="/date/{localDate}", method=RequestMethod.GET)
-    public ResponseEntity<ScheduleDTO> findByDate(@PathVariable String localDate){
-    	LocalDate date = LocalDate.parse(localDate);
+    @RequestMapping(value="/date/{instant}", method=RequestMethod.GET)
+    public ResponseEntity<ScheduleDTO> findByDate(@PathVariable String instant){
+    	Instant date = Instant.parse(instant);
         ScheduleDTO dto = service.findByDate(date);
         return ResponseEntity.ok().body(dto);
     }

@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +77,7 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleDTO findByDate(LocalDate date){
+    public ScheduleDTO findByDate(Instant date){
         Optional<Schedule> schedule = scheduleRepository.findByDate(date);
         Schedule entity = schedule.orElseThrow(() -> new ResourceNotFoundException("Entity by date not found"));
 

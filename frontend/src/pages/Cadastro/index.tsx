@@ -1,6 +1,8 @@
 import './styles.css'
 import Navbar from "components/Navbar";
 
+
+
 const Cadastro = () => {
     return(
         <>

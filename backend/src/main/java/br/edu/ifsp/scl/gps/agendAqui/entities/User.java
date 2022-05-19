@@ -21,7 +21,7 @@ public class User implements UserDetails, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String NomeCompleto;
+	private String nomeCompleto;
 	private String email;
 	private String cpf;
 	private String telefone;
@@ -43,7 +43,7 @@ public class User implements UserDetails, Serializable {
 
 	public User(Long id, String nomeCompleto, String email, String cpf, String telefone, String senha) {
 		this.id = id;
-		NomeCompleto = nomeCompleto;
+		this.nomeCompleto = nomeCompleto;
 		this.email = email;
 		this.cpf = cpf;
 		this.telefone = telefone;
@@ -59,11 +59,11 @@ public class User implements UserDetails, Serializable {
 	}
 
 	public String getNomeCompleto() {
-		return NomeCompleto;
+		return nomeCompleto;
 	}
 
 	public void setNomeCompleto(String nomeCompleto) {
-		NomeCompleto = nomeCompleto;
+		this.nomeCompleto = nomeCompleto;
 	}
 
 	public String getEmail() {

@@ -5,6 +5,7 @@ import br.edu.ifsp.scl.gps.agendAqui.entities.User;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 
 public class ScheduleDTO implements Serializable {
@@ -14,7 +15,7 @@ public class ScheduleDTO implements Serializable {
     private Long id;
 
     @NotBlank(message = "Campo obrigatório")
-    private LocalDate date;
+    private Instant date;
 
     private User provider;
 
@@ -23,7 +24,7 @@ public class ScheduleDTO implements Serializable {
     public ScheduleDTO() {
     }
 
-    public ScheduleDTO(Long id, LocalDate date, User provider, User client) {
+    public ScheduleDTO(Long id, Instant date, User provider, User client) {
         this.id = id;
         this.date = date;
         this.provider = provider;
@@ -45,11 +46,11 @@ public class ScheduleDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 

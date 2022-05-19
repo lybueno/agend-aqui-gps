@@ -1,10 +1,9 @@
 package br.edu.ifsp.scl.gps.agendAqui.entities;
 
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import java.time.LocalDate;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "tb_schedule")
@@ -13,7 +12,8 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant date;
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
@@ -32,11 +32,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 

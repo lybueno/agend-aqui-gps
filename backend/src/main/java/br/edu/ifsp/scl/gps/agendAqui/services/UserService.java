@@ -35,9 +35,6 @@ public class UserService implements UserDetailsService {
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Autowired
 	private UserRepository repository;
 	
 	@Autowired
@@ -57,12 +54,19 @@ public class UserService implements UserDetailsService {
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new UserDTO(entity);
 	}
+	
+	@Transactional(readOnly = true)
+	public UserDTO findByEmail(String email) {
+		User user = repository.findByEmail(email);
+		User entity = user;
+		return new UserDTO(entity);
+	}
 
 	@Transactional
 	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
 		copyDtoToEntity(dto, entity);
-		entity.setSenha(passwordEncoder.encode(dto.getSenha()));
+		entity.setSenha(dto.getSenha());
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}

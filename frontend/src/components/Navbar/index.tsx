@@ -29,7 +29,7 @@ const Navbar = () => {
                             <a href="link">AGENDAR</a>
                         </li>
                         <li>
-                            <a href="link">AGENDAMENTOS</a>
+                            <a href="/schedule">AGENDAMENTOS</a>
                         </li>
                     </ul>
                 </div>
