@@ -13,20 +13,22 @@ const CardLogin = () => {
   const [teste, setTeste] = useState("teste")
   const [password, setPassword] = useState("");
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
    
-  //     fetch(`http://localhost:8080/users/login/${email}`)
-  //     .then(response => response.json())
-  //     .then((res) => {
-  //         setUser(res)
-  //         console.log("AHAHAHAHAH"+res.email)
-  //         localStorage.setItem(res.id, res.email);
-  //     })
+      localStorage.clear()
+      fetch(`http://localhost:8080/users/login/${email}`)
+      .then(response => response.json())
+      .then((res) => {
+          if (res.id) {
+            //localStorage.clear();
+            localStorage.setItem("id-client", res.id);
+            alert(res.email + "=" + res.id);
+          };
+      })
 
-  //     await login(email, password)
       
-  // }
+  }
 
   // const handleSubmit = async () => {
   //   try{
@@ -36,20 +38,20 @@ const CardLogin = () => {
   //   }
   // };
 
-  const handleSubmit = (values) => {
-    fetch(`http://localhost:8080/users/login/${email}`)
-    .then(response => {
-      const data = response.json
-      if( data ){
-        localStorage.setItem("email-resp", data)
+  // const handleSubmit = () => {
+  //   fetch(`http://localhost:8080/users/login/${email}`)
+  //   .then(response => {
+  //     const data = JSON.stringify(response)
+  //     if( data ){
+  //       localStorage.setItem("email-resp", data)
+  //       alert(data)
 
-      }
-    })
+  //     }
+  //   })
+  // }
 
   return (
     <div className="login-card">
-      {user}
-      {authenticated}
       <h1>LOGIN</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -73,7 +75,9 @@ const CardLogin = () => {
           />
         </div>
         <div className="login-submit">
-          <ButtonIcon />
+          <Link to="/schedule">
+            <ButtonIcon />
+          </Link>
         </div>
         <div className="signup-container">
           <span className="not-registered">Não tem Cadastro?</span>

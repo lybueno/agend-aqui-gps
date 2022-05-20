@@ -7,7 +7,7 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const recoveredUser = localStorage.getItem(`user`)
+        const recoveredUser = localStorage.getItem('id-client')
 
         if(recoveredUser){
             setUser(JSON.parse(recoveredUser));
