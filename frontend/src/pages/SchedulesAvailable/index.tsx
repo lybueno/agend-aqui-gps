@@ -1,18 +1,16 @@
 import Navbar from "components/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Schedule } from "types/schedule";
+import { AuthContext } from "contexts/auth";
 
 
 const SchedulesAvailabe = () => {
-
-
+    const { user } = useContext(AuthContext);
     const [data, setData] = useState([])
-    var idData = localStorage.getItem("id-client");
      
 
     useEffect(()=> {
-      const id = localStorage.getItem("id-client");
-        fetch(`http://localhost:8080/schedule/client/${id}`)
+        fetch(`http://localhost:8080/schedule/client/${user}`)
           .then((response) => response.json())
           .then((res) => {
             setData(res);
@@ -26,12 +24,13 @@ const SchedulesAvailabe = () => {
         
         return(<div>
             <Navbar />
+            ID USER: {user}
             <h1>NADAAAAAAAAAAAAA</h1>
         </div>)
     }else{
         return (
           <div>
-            {idData}
+            ID USER: {user}
             <Navbar />
             {data &&
               data.map((schedule: Schedule, index) => (

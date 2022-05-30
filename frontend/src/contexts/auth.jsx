@@ -1,32 +1,31 @@
+
 import React, {createContext, useState, useEffect} from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState("teste")
+    const navigate = useNavigate()
+
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const recoveredUser = localStorage.getItem('id-client')
-
-        if(recoveredUser){
-            setUser(JSON.parse(recoveredUser));
-        }
-
-        setLoading(false)
-    }, [])
 
     const login = async (email, password) => {
-        console.log(email + "-- " + password)
-        var loggedUser = null
-        
-        const info = await fetch(`http://localhost:8080/users/login/${email}`)
-        const seila = await info.json()
-    
-        setUser(seila.email)
 
+        
+        const sqlUser = await fetch(`http://localhost:8080/users/login/${email}`)
+        const infoUser = await sqlUser.json()
     
-        return info
+        if(infoUser.id){
+            setUser(infoUser.id)
+            navigate("/schedule")
+        }
+        
+    
+    
+        return infoUser
 
     }
 
@@ -34,7 +33,7 @@ export const AuthProvider = ({children}) => {
         console.log("logout")
     };
 
-    return(<AuthContext.Provider value={{authenticatred: !!user, user, login, logout}}>
+    return(<AuthContext.Provider value={{user, login, logout}}>
         {children}
     </AuthContext.Provider>
     )

@@ -7,36 +7,37 @@ import { User } from "types/user";
 import { Link } from "react-router-dom";
 
 const CardLogin = () => {
-  const { authenticated, login, user } = useContext(AuthContext);
+  const { login, user } = useContext(AuthContext);
 
   const [email, setEmail] = useState("")
   const [teste, setTeste] = useState("teste")
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
    
-      localStorage.clear()
-      fetch(`http://localhost:8080/users/login/${email}`)
-      .then(response => response.json())
-      .then((res) => {
-          if (res.id) {
-            //localStorage.clear();
-            localStorage.setItem("id-client", res.id);
-            alert(res.email + "=" + res.id);
-          };
-      })
+  //     // localStorage.clear()
+  //     // fetch(`http://localhost:8080/users/login/${email}`)
+  //     // .then(response => response.json())
+  //     // .then((res) => {
+  //     //   alert(res.email)
+  //     //     if (res.id) {
+  //     //       //localStorage.clear();
+  //     //       localStorage.setItem("id-client", res.email);
+  //     //       alert(res.email + "=" + res.id);
+  //     //       alert(localStorage.getItem("id-client"))
+  //     //     };
+  //     // })
 
       
-  }
+  // }
 
-  // const handleSubmit = async () => {
-  //   try{
-  //     const teste = login(email, password)
-  //   }catch(err){
-  //     console.log("ERO")
-  //   }
-  // };
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
+    const teste = await login(email, password)
+  
+
+  };
 
   // const handleSubmit = () => {
   //   fetch(`http://localhost:8080/users/login/${email}`)
@@ -75,9 +76,9 @@ const CardLogin = () => {
           />
         </div>
         <div className="login-submit">
-          <Link to="/schedule">
+          {/* <Link to="/schedule"> */}
             <ButtonIcon />
-          </Link>
+          {/* </Link> */}
         </div>
         <div className="signup-container">
           <span className="not-registered">Não tem Cadastro?</span>
