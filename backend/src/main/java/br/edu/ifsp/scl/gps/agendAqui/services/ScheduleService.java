@@ -1,9 +1,7 @@
 package br.edu.ifsp.scl.gps.agendAqui.services;
 
 import br.edu.ifsp.scl.gps.agendAqui.dto.ScheduleDTO;
-import br.edu.ifsp.scl.gps.agendAqui.dto.ScheduleInsertDTO;
 import br.edu.ifsp.scl.gps.agendAqui.dto.ScheduleUpdateDTO;
-import br.edu.ifsp.scl.gps.agendAqui.dto.UserDTO;
 import br.edu.ifsp.scl.gps.agendAqui.entities.Schedule;
 import br.edu.ifsp.scl.gps.agendAqui.entities.User;
 import br.edu.ifsp.scl.gps.agendAqui.repositories.ScheduleRepository;
@@ -16,14 +14,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ScheduleService {
@@ -34,6 +32,11 @@ public class ScheduleService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
+    public List<ScheduleDTO> findAll(){
+        List<Schedule> list = scheduleRepository.findAll();
+        return list.stream().map(x -> new ScheduleDTO(x)).collect(Collectors.toList());
+    }
 
     @Transactional
     public ScheduleDTO findById(Long id){
@@ -56,7 +59,7 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleDTO insert(ScheduleInsertDTO dto){
+    public ScheduleDTO insert(@Valid ScheduleDTO dto){
         Schedule entity = new Schedule();
         copyDtoToEntity(dto, entity);
         entity = scheduleRepository.save(entity);
@@ -77,12 +80,13 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleDTO findByDate(Instant date){
+    public ScheduleDTO findByDate(LocalDateTime date){
         Optional<Schedule> schedule = scheduleRepository.findByDate(date);
         Schedule entity = schedule.orElseThrow(() -> new ResourceNotFoundException("Entity by date not found"));
 
         return new ScheduleDTO(entity);
     }
+
 
     @Transactional
     public ScheduleDTO update(Long id, ScheduleUpdateDTO dto){

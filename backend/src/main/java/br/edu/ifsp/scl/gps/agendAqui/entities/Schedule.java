@@ -3,7 +3,7 @@ package br.edu.ifsp.scl.gps.agendAqui.entities;
 
 import javax.persistence.*;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_schedule")
@@ -13,7 +13,7 @@ public class Schedule {
     private Long id;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant date;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
@@ -32,11 +32,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public Instant getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -55,4 +55,5 @@ public class Schedule {
     public void setIdUserClient(User client) {
         this.client = client;
     }
+
 }

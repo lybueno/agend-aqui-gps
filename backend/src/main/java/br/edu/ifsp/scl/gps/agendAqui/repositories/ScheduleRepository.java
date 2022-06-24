@@ -4,12 +4,10 @@ package br.edu.ifsp.scl.gps.agendAqui.repositories;
 import br.edu.ifsp.scl.gps.agendAqui.entities.Schedule;
 import br.edu.ifsp.scl.gps.agendAqui.entities.User;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,5 +18,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findByClient(User client);
 
-    Optional<Schedule> findByDate(Instant date);
+    Optional<Schedule> findByDate(LocalDateTime date);
+
 }

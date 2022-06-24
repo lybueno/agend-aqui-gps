@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate()
 
     const [user, setUser] = useState(null)
+    const [typeUser, setTypeUser] = useState(null);
     const [loading, setLoading] = useState(true)
 
 
@@ -19,7 +20,12 @@ export const AuthProvider = ({children}) => {
         const infoUser = await sqlUser.json()
     
         if(infoUser.id){
-            setUser(infoUser.id)
+            setUser(infoUser)
+            if(infoUser.roles[0].authority === "ROLE_PROVIDER"){
+                setTypeUser("provider")
+            }else{
+                setTypeUser("client");
+            }
             navigate("/schedule")
         }
         
@@ -33,7 +39,7 @@ export const AuthProvider = ({children}) => {
         console.log("logout")
     };
 
-    return(<AuthContext.Provider value={{user, login, logout}}>
+    return(<AuthContext.Provider value={{user, login, logout, typeUser}}>
         {children}
     </AuthContext.Provider>
     )

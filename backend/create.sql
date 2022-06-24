@@ -9,8 +9,10 @@ alter table if exists tb_user_role add constraint FKea2ootw6b6bb0xt3ptl28bymv fo
 alter table if exists tb_user_role add constraint FK7vn3h53d0tqdimm8cp45gc0kl foreign key (user_id) references tb_user;
 INSERT INTO tb_user (nome_completo, email, cpf, telefone, senha) VALUES ('Bob Brown', 'bob@gmail.com', '111.111.111-11', '(16)99123-4567', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (nome_completo, email, cpf, telefone, senha) VALUES ('Bill Green', 'bill@gmail.com', '222.222.222-22', '(17)98147-8523', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_role (authority) VALUES ('ROLE_PROVIDER');
-INSERT INTO tb_role (authority) VALUES ('ROLE_CUSTOMER');
+INSERT INTO tb_role (authority) VALUES ('provider');
+INSERT INTO tb_role (authority) VALUES ('client');
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 INSERT INTO tb_schedule(id, date, provider_id, client_id) VALUES(1, TIMESTAMP WITH TIME ZONE '2022-05-14T10:00:00Z', 1, 2);
+INSERT INTO tb_schedule(id, date, provider_id, client_id) VALUES(1, TIMESTAMP WITH TIME ZONE '2022-05-14T11:00:00Z',
+                                                                 1, null);

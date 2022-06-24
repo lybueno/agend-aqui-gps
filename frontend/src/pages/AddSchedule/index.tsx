@@ -1,46 +1,47 @@
 import './styles.css'
 import Navbar from "components/Navbar";
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "contexts/auth";
+import axios from "axios";
 
 
 
 const Cadastro = () => {
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+    const { login, user } = useContext(AuthContext);
 
-    const [nome_completo, setNome] = useState("")
-    const [email, setEmail] = useState("")
-    const [tipo, setTipo] = useState("")
-    const [cpf, setCpf] = useState("")
-    const [fone, setFone] = useState("")
-    const [senha, setSenha] = useState("")
+    const [data, setData] = useState("")
+
+    const [useComplete, setUserComplete] = useState()
+
+
+    // useEffect(() => {
+    //   axios
+    //     .get(`http://localhost:8080/schedule/${typeUser}/${user}`)
+    //     .then((response) => {
+    //       const dado = response.data;
+    //       console.log(response);
+    //       setData(dado);
+    //       console.log(dado);
+    //     });
+    // }, [data.length]);
+
     
 
     let handleSubmit = async (e: { preventDefault: () => void; }) => {
       e.preventDefault();
 
-      createUser()
+      createSchedule()
     };
 
-    async function createUser(){
+    async function createSchedule(){
         let body = JSON.stringify({
-            nomeCompleto: nome_completo,
-            email: email,
-            roles: [
-                {
-                    id: 1,
-                    authority: tipo
-                }
-            ],
-            cpf: cpf,
-            telefone: fone,
-            senha: senha
+            date: data
         });
         try {
             console.log(body)
-          let res = await fetch(`http://localhost:8080/users/add`, {
+          let res = await fetch(`http://localhost:8080/schedule/add`, {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -49,8 +50,7 @@ const Cadastro = () => {
             body: body,
           });
           if (res.status === 201) {
-            const teste = await login(email, senha);
-            // navigate("/")
+            navigate("/schedules")
           } 
         } catch (e) {
           console.log(e);
@@ -63,7 +63,7 @@ const Cadastro = () => {
         <div className="base-card login-card">
           <h1>CADASTRO</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <input
                 type="text"
                 className="form-control base-input"
@@ -122,7 +122,7 @@ const Cadastro = () => {
             </div>
             <div className="login-submit">
               <input type="submit" value="Cadastrar" className="btn"></input>
-            </div>
+            </div> */}
           </form>
         </div>
       </>

@@ -13,24 +13,6 @@ const CardLogin = () => {
   const [teste, setTeste] = useState("teste")
   const [password, setPassword] = useState("");
 
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-   
-  //     // localStorage.clear()
-  //     // fetch(`http://localhost:8080/users/login/${email}`)
-  //     // .then(response => response.json())
-  //     // .then((res) => {
-  //     //   alert(res.email)
-  //     //     if (res.id) {
-  //     //       //localStorage.clear();
-  //     //       localStorage.setItem("id-client", res.email);
-  //     //       alert(res.email + "=" + res.id);
-  //     //       alert(localStorage.getItem("id-client"))
-  //     //     };
-  //     // })
-
-      
-  // }
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault()
@@ -39,17 +21,6 @@ const CardLogin = () => {
 
   };
 
-  // const handleSubmit = () => {
-  //   fetch(`http://localhost:8080/users/login/${email}`)
-  //   .then(response => {
-  //     const data = JSON.stringify(response)
-  //     if( data ){
-  //       localStorage.setItem("email-resp", data)
-  //       alert(data)
-
-  //     }
-  //   })
-  // }
 
   return (
     <div className="login-card">

@@ -1,6 +1,8 @@
 package br.edu.ifsp.scl.gps.agendAqui.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -9,12 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,10 +40,10 @@ public class UserService implements UserDetailsService {
 	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable){
-		Page<User> list =  repository.findAll(pageable);
+	public List<UserDTO> findAll(){
+		List<User> list =  repository.findAll();
 		
-		return list.map(x -> new UserDTO(x));
+		return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	
 	}
 	

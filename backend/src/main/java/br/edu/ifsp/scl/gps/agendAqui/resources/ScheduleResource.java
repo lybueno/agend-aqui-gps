@@ -2,17 +2,17 @@ package br.edu.ifsp.scl.gps.agendAqui.resources;
 
 import br.edu.ifsp.scl.gps.agendAqui.dto.*;
 import br.edu.ifsp.scl.gps.agendAqui.services.ScheduleService;
+import br.edu.ifsp.scl.gps.agendAqui.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/schedule")
@@ -20,6 +20,16 @@ public class ScheduleResource {
 
     @Autowired
     private ScheduleService service;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/availables")
+    public ResponseEntity<List<ScheduleDTO>> findAll(){
+        List<ScheduleDTO> listDto = service.findAll();
+        List<ScheduleDTO> availables = listDto.stream().filter(x -> x.getClient() == null).collect(Collectors.toList());
+        return ResponseEntity.ok().body(availables);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleDTO> findById(@PathVariable Long id){
@@ -39,15 +49,18 @@ public class ScheduleResource {
         return ResponseEntity.ok().body(listDto);
     }
 
+
     @RequestMapping(value="/date/{instant}", method=RequestMethod.GET)
     public ResponseEntity<ScheduleDTO> findByDate(@PathVariable String instant){
-    	Instant date = Instant.parse(instant);
+    	LocalDateTime date = LocalDateTime.parse(instant);
         ScheduleDTO dto = service.findByDate(date);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<ScheduleDTO> insert(@Valid @RequestBody ScheduleInsertDTO dto){
+    @PostMapping("/add")
+    public ResponseEntity<ScheduleDTO> insert(@RequestBody ScheduleDTO dto){
+        //UserDTO providerDto = userService.findById(dto.getProvider().getId());
+        //ScheduleDTO newSchedule = new ScheduleDTO(dto.getId(), dto.getDate().toString(), providerDto);
         ScheduleDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
@@ -60,7 +73,7 @@ public class ScheduleResource {
         return ResponseEntity.ok().body(newDto);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/update/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();

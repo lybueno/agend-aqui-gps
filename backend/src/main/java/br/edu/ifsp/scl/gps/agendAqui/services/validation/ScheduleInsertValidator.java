@@ -2,7 +2,6 @@ package br.edu.ifsp.scl.gps.agendAqui.services.validation;
 
 import br.edu.ifsp.scl.gps.agendAqui.dto.ScheduleInsertDTO;
 import br.edu.ifsp.scl.gps.agendAqui.entities.Schedule;
-import br.edu.ifsp.scl.gps.agendAqui.entities.User;
 import br.edu.ifsp.scl.gps.agendAqui.repositories.ScheduleRepository;
 import br.edu.ifsp.scl.gps.agendAqui.resources.exceptions.FieldMessage;
 import org.springframework.beans.factory.annotation.Autowired;

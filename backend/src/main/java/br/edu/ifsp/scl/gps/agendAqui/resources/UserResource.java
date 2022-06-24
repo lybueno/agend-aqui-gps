@@ -1,12 +1,12 @@
 package br.edu.ifsp.scl.gps.agendAqui.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import br.edu.ifsp.scl.gps.agendAqui.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,12 +30,10 @@ public class UserResource {
 	@Autowired
 	private UserService service;
 
-	@GetMapping
-	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
+	@GetMapping(value = "/all")
+	public ResponseEntity<List<UserDTO>> findAll() {
 		
-		// PARAMETROS: page, size, sort
-		
-		Page<UserDTO> list = service.findAllPaged(pageable);
+		List<UserDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -51,7 +49,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(dto);
 	}
 	
-	@PostMapping
+	@PostMapping(value = "/add")
 	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto){
 		UserDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
